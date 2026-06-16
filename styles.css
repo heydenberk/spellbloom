@@ -74,3 +74,6 @@ h1, h2 { text-align: center; }
 .scene-complete { text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
 .scene-complete button { background: var(--gold); color: var(--ink); border: none;
   border-radius: 12px; padding: 12px 20px; font-size: 18px; font-weight: 800; cursor: pointer; }
+
+/* --- word picture (replaces the word she must spell) --- */
+.word-pic { display: inline-block; font-size: 1.25em; vertical-align: -0.12em; margin: 0 0.1em; }

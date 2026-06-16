@@ -3,7 +3,7 @@ import * as content from './content.js';
 import { startSession, getCurrentSpell, registerAttempt } from './engine.js';
 import { loadProgress, saveProgress, recordSpell, sceneBloomPercent, isSceneComplete } from './progress.js';
 import { createAudio } from './audio.js';
-import { renderScene, bloomElement, updateStatus } from './ui/sceneView.js';
+import { renderScene, bloomElement, updateStatus, ELEMENT_GLYPH } from './ui/sceneView.js';
 import { renderSpell } from './ui/spellBuilder.js';
 import { initSettings } from './ui/settings.js';
 import { getScenes } from './content.js';
@@ -39,6 +39,7 @@ function drawSpell() {
   audio.speak(spell.phrase); // read the spell aloud on arrival
   builder = renderSpell(spellRoot, {
     spell,
+    wordGlyph: ELEMENT_GLYPH[spell.element] ?? '✨',
     inputMode: progress.settings.inputMode,
     audio,
     getMisses: () => session.misses,

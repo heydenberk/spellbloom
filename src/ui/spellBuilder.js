@@ -1,18 +1,26 @@
 // src/ui/spellBuilder.js — read-the-spell + build-the-word interaction
 import { buildTileSet, isComplete, isCorrect, nextCorrectIndex } from '../word.js';
 
-// renderSpell(root, { spell, inputMode, audio, getMisses, onAttempt, onCast })
+// renderSpell(root, { spell, wordGlyph, inputMode, audio, getMisses, onAttempt, onCast })
+//   wordGlyph -> picture shown in place of the word she must spell (so she can't copy it)
 //   onAttempt(success) -> called on every full-word attempt (updates engine/hints)
 //   getMisses() -> current miss count (for hint escalation)
 //   onCast() -> called once when the word is correct
 export function renderSpell(root, opts) {
-  const { spell, inputMode, audio } = opts;
+  const { spell, wordGlyph = '✨', inputMode, audio } = opts;
   const placed = new Array(spell.word.length).fill(null);
   let rng = Math.random;
 
+  // Hide the target word in the scroll — show its picture instead — so she spells
+  // from the sound (heard via 🔊 / read-aloud) rather than copying the letters.
+  const maskedPhrase = spell.phrase.replace(
+    new RegExp(`\\b${spell.word}\\b`),
+    `<span class="word-pic" aria-label="${spell.word}">${wordGlyph}</span>`
+  );
+
   root.innerHTML = `
     <div class="scroll">
-      <span class="scroll-text">${spell.phrase}</span>
+      <span class="scroll-text">${maskedPhrase}</span>
       <button class="hear-btn" aria-label="hear the spell">🔊</button>
     </div>
     <div class="slots"></div>
