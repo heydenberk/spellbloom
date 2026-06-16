@@ -33,3 +33,27 @@ h1, h2 { text-align: center; }
 .sparkle { position: absolute; top: -10px; left: 50%; font-size: 24px; animation: sparkle .7s ease forwards; }
 @keyframes sparkle { 0% { opacity: 0; transform: translate(-50%, 0) scale(.5); }
   40% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -30px) scale(1.4); } }
+
+/* --- spell builder --- */
+#spell { padding: 14px 16px 26px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.scroll { background: var(--cream); color: var(--ink); font-weight: 800; font-size: 26px;
+  padding: 12px 22px; border-radius: 14px; box-shadow: 0 5px 0 rgba(0,0,0,.2);
+  transform: rotate(-1.5deg); display: flex; align-items: center; gap: 12px; }
+.hear-btn { font-size: 20px; background: var(--gold); border: none; border-radius: 50%;
+  width: 38px; height: 38px; cursor: pointer; }
+.hear-btn.pulse { animation: pulse 1s ease infinite; }
+@keyframes pulse { 50% { transform: scale(1.2); } }
+.slots { display: flex; gap: 10px; }
+.slot { width: 48px; height: 56px; border: 3px dashed rgba(255,255,255,.7); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: var(--ink); }
+.slot.filled { background: #fff; border-style: solid; }
+.slot.glow { box-shadow: 0 0 0 3px var(--gold), 0 0 18px var(--gold); border-color: var(--gold); }
+.tray { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  background: rgba(0,0,0,.18); border-radius: 18px; padding: 10px 14px; max-width: 520px; }
+.tile { width: 44px; height: 52px; border: none; border-radius: 9px; background: var(--gold);
+  color: var(--ink); font-size: 24px; font-weight: 800; box-shadow: 0 3px 0 rgba(0,0,0,.25); cursor: grab; touch-action: none; }
+.tile.used { visibility: hidden; }
+.tile.wrong { animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.tile.ghost { position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 99; opacity: .9; }
+.nudge { font-size: 15px; opacity: .85; }
