@@ -1,0 +1,89 @@
+{
+  "planPath": "docs/superpowers/plans/2026-06-16-spellbloom-reading-game.md",
+  "tasks": [
+    {
+      "id": 0,
+      "subject": "Task 0: Project scaffold & dev server",
+      "status": "pending",
+      "description": "**Goal:** Served page loads the module entry; node --test passes a smoke test.\n\n**Files:** package.json, index.html, styles.css, src/main.js, tests/smoke.test.js, README.md\n\n**Verify:** `npm test`; `npm run serve`.\n\n```json:metadata\n{\"files\":[\"package.json\",\"index.html\",\"styles.css\",\"src/main.js\",\"tests/smoke.test.js\",\"README.md\"],\"verifyCommand\":\"npm test\",\"acceptanceCriteria\":[\"npm test passes\",\"page serves with title Spellbloom, no console errors\"]}\n```"
+    },
+    {
+      "id": 1,
+      "subject": "Task 1: Content data module",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** Spell/scene data with Glade fully populated + pure accessors, validated by tests.\n\n**Files:** src/content.js, tests/content.test.js\n\n**Verify:** `node --test tests/content.test.js`.\n\n```json:metadata\n{\"files\":[\"src/content.js\",\"tests/content.test.js\"],\"verifyCommand\":\"node --test tests/content.test.js\",\"acceptanceCriteria\":[\"4 scenes in order\",\"glade >=8 valid spells\",\"accessors behave per tests\"]}\n```"
+    },
+    {
+      "id": 2,
+      "subject": "Task 2: Word & tile logic",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** Pure helpers: buildTileSet, deterministic shuffle, isComplete/isCorrect, nextCorrectIndex.\n\n**Files:** src/word.js, tests/word.test.js\n\n**Verify:** `node --test tests/word.test.js`.\n\n```json:metadata\n{\"files\":[\"src/word.js\",\"tests/word.test.js\"],\"verifyCommand\":\"node --test tests/word.test.js\",\"acceptanceCriteria\":[\"tile set unique ids\",\"shuffle deterministic with injected rng\",\"validation + hint index per tests\"]}\n```"
+    },
+    {
+      "id": 3,
+      "subject": "Task 3: Session spell queue",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** Pure queue: order unmastered spells, re-queue misses to back, mastery after streak >=2.\n\n**Files:** src/queue.js, tests/queue.test.js\n\n**Verify:** `node --test tests/queue.test.js`.\n\n```json:metadata\n{\"files\":[\"src/queue.js\",\"tests/queue.test.js\"],\"verifyCommand\":\"node --test tests/queue.test.js\",\"acceptanceCriteria\":[\"isMastered streak>=2\",\"buildQueue order\",\"onResult remove/append\"]}\n```"
+    },
+    {
+      "id": 4,
+      "subject": "Task 4: Progress state & persistence",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** Pure progress transitions + localStorage adapter with injectable storage.\n\n**Files:** src/progress.js, tests/progress.test.js\n\n**Verify:** `node --test tests/progress.test.js`.\n\n```json:metadata\n{\"files\":[\"src/progress.js\",\"tests/progress.test.js\"],\"verifyCommand\":\"node --test tests/progress.test.js\",\"acceptanceCriteria\":[\"emptyProgress defaults\",\"recordSpell success/failure\",\"bloom%/complete\",\"save/load round-trip + tolerant\"]}\n```"
+    },
+    {
+      "id": 5,
+      "subject": "Task 5: Session engine",
+      "status": "pending",
+      "blockedBy": [1, 3, 4],
+      "description": "**Goal:** Pure session state machine: startSession, getCurrentSpell, registerAttempt.\n\n**Files:** src/engine.js, tests/engine.test.js\n\n**Verify:** `node --test tests/engine.test.js`.\n\n```json:metadata\n{\"files\":[\"src/engine.js\",\"tests/engine.test.js\"],\"verifyCommand\":\"node --test tests/engine.test.js\",\"acceptanceCriteria\":[\"startSession loads first spell\",\"fail increments misses\",\"success advances + resets\",\"null at end\"]}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 6: Audio module",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** createAudio with speak/speakWord/sfx/setEnabled, gated by sound flag. Manual browser verify.\n\n**Files:** src/audio.js\n\n**Verify:** Manual browser console.\n\n```json:metadata\n{\"files\":[\"src/audio.js\"],\"verifyCommand\":\"manual: browser console speak/sfx/setEnabled\",\"acceptanceCriteria\":[\"speak/speakWord/sfx/setEnabled exposed\",\"silent when disabled\",\"speakWord slower\"]}\n```"
+    },
+    {
+      "id": 7,
+      "subject": "Task 7: Scene view UI",
+      "status": "pending",
+      "blockedBy": [1],
+      "description": "**Goal:** renderScene + bloomElement (pop + sparkle). Manual browser verify.\n\n**Files:** src/ui/sceneView.js, styles.css\n\n**Verify:** Manual browser console.\n\n```json:metadata\n{\"files\":[\"src/ui/sceneView.js\",\"styles.css\"],\"verifyCommand\":\"manual: browser console renderScene + bloomElement\",\"acceptanceCriteria\":[\"renderScene draws scene/HUD/elements\",\"bloomElement animates with sparkle\"]}\n```"
+    },
+    {
+      "id": 8,
+      "subject": "Task 8: Spell builder UI",
+      "status": "pending",
+      "blockedBy": [2, 6],
+      "description": "**Goal:** Scroll+phrase+🔊, slots, drag/type tiles, gentle wrong-tile, escalating hints, cast callback. Manual browser verify.\n\n**Files:** src/ui/spellBuilder.js, styles.css\n\n**Verify:** Manual browser console drag+type.\n\n```json:metadata\n{\"files\":[\"src/ui/spellBuilder.js\",\"styles.css\"],\"verifyCommand\":\"manual: browser console renderSpell drag+type\",\"acceptanceCriteria\":[\"🔊 speaks phrase\",\"drag + type placement\",\"wrong tile bloop+return\",\"hints escalate\",\"onCast once when correct\"]}\n```"
+    },
+    {
+      "id": 9,
+      "subject": "Task 9: Grown-up settings panel",
+      "status": "pending",
+      "blockedBy": [4],
+      "description": "**Goal:** Press-and-hold overlay: start scene, input mode, sound, reset (confirm). Manual browser verify.\n\n**Files:** src/ui/settings.js, styles.css\n\n**Verify:** Manual browser console.\n\n```json:metadata\n{\"files\":[\"src/ui/settings.js\",\"styles.css\"],\"verifyCommand\":\"manual: browser console initSettings\",\"acceptanceCriteria\":[\"opens only on press-and-hold\",\"onChange with new settings\",\"reset behind confirm calls onReset\"]}\n```"
+    },
+    {
+      "id": 10,
+      "subject": "Task 10: Wire the full loop",
+      "status": "pending",
+      "blockedBy": [5, 6, 7, 8, 9],
+      "description": "**Goal:** main.js connects engine+progress+audio+UI into playable Glade with persistence, scene completion, settings. Manual browser verify.\n\n**Files:** src/main.js, styles.css\n\n**Verify:** Manual — play full Glade.\n\n```json:metadata\n{\"files\":[\"src/main.js\",\"styles.css\"],\"verifyCommand\":\"manual: play full Glade in browser\",\"acceptanceCriteria\":[\"loads progress + renders bloomed\",\"cast blooms+star+save+advance\",\"scene complete unlocks next\",\"settings take effect\"]}\n```"
+    },
+    {
+      "id": 11,
+      "subject": "Task 11: Populate remaining scenes & polish",
+      "status": "pending",
+      "blockedBy": [7, 10],
+      "description": "**Goal:** Add Pond/Sky/Castle spells (>=8 each) + element glyphs; strengthen content test. Manual play all scenes.\n\n**Files:** src/content.js, src/ui/sceneView.js, tests/content.test.js\n\n**Verify:** `npm test`; play all four scenes.\n\n```json:metadata\n{\"files\":[\"src/content.js\",\"src/ui/sceneView.js\",\"tests/content.test.js\"],\"verifyCommand\":\"npm test\",\"acceptanceCriteria\":[\"each scene >=8 valid spells\",\"every element has a glyph\",\"content.test passes\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-06-16T00:00:00Z"
+}
