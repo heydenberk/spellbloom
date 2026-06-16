@@ -3,7 +3,7 @@ import * as content from './content.js';
 import { startSession, getCurrentSpell, registerAttempt } from './engine.js';
 import { loadProgress, saveProgress, recordSpell, sceneBloomPercent, isSceneComplete } from './progress.js';
 import { createAudio } from './audio.js';
-import { renderScene, bloomElement } from './ui/sceneView.js';
+import { renderScene, bloomElement, updateStatus } from './ui/sceneView.js';
 import { renderSpell } from './ui/spellBuilder.js';
 import { initSettings } from './ui/settings.js';
 import { getScenes } from './content.js';
@@ -52,7 +52,7 @@ function onCast(spell) {
   saveProgress(progress, globalThis.localStorage);
   audio.sfx('chime');
   bloomElement(sceneRoot, spell.element);
-  drawScene();
+  updateStatus(sceneRoot, { stars: progress.stars, bloomPercent: sceneBloomPercent(progress, sceneSpells()) });
   session = registerAttempt(session, true);
   setTimeout(drawSpell, 1100); // let the bloom play before next spell
 }
@@ -78,10 +78,20 @@ initSettings({
   button: document.getElementById('settings-btn'),
   getSettings: () => progress.settings,
   onChange: s => {
+    const prev = progress.settings;
     progress = { ...progress, settings: s };
-    saveProgress(progress, globalThis.localStorage);
     audio.setEnabled(s.sound);
-    drawSpell(); // re-render so inputMode change takes effect
+    if (s.startScene !== prev.startScene) {
+      // jump to the chosen scene now
+      progress = { ...progress, currentScene: s.startScene };
+      session = startSession(progress, s.startScene, content);
+      saveProgress(progress, globalThis.localStorage);
+      drawScene();
+      drawSpell();
+      return;
+    }
+    saveProgress(progress, globalThis.localStorage);
+    if (s.inputMode !== prev.inputMode) drawSpell(); // only re-render when the input method changed
   },
   onReset: () => {
     globalThis.localStorage.removeItem('spellbloom.progress.v1');

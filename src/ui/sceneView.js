@@ -37,6 +37,13 @@ function makeElement(elementId, animate) {
   return el;
 }
 
+export function updateStatus(root, { stars, bloomPercent }) {
+  document.getElementById('stars').textContent = `⭐ ${stars}`;
+  document.getElementById('bloom-label').textContent = `${bloomPercent}% bloomed`;
+  const fill = root.querySelector('.bloom-fill');
+  if (fill) fill.style.width = `${bloomPercent}%`;
+}
+
 export function bloomElement(root, elementId) {
   const layer = root.querySelector('.scene-elements');
   if (!layer || layer.querySelector(`[data-element="${elementId}"]`)) return;

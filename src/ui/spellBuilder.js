@@ -50,7 +50,7 @@ export function renderSpell(root, opts) {
     if (placed[index] != null) return false;
     placed[index] = letter;
     const slot = slotsEl.querySelector(`.slot[data-index="${index}"]`);
-    slot.textContent = letter; slot.classList.add('filled');
+    slot.textContent = letter; slot.classList.add('filled'); slot.classList.remove('glow');
     slot.dataset.tileId = tileEl.dataset.id;
     tileEl.classList.add('used'); tileEl.disabled = true;
     audio.sfx('sparkle');
