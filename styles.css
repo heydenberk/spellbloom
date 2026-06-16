@@ -69,3 +69,8 @@ h1, h2 { text-align: center; }
 .settings-card button { padding: 10px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; }
 .reset-btn { background: #f3d2d2; }
 .close-btn { background: var(--gold); }
+
+/* --- scene complete --- */
+.scene-complete { text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.scene-complete button { background: var(--gold); color: var(--ink); border: none;
+  border-radius: 12px; padding: 12px 20px; font-size: 18px; font-weight: 800; cursor: pointer; }
