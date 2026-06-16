@@ -30,3 +30,16 @@ test('getSpell returns the matching spell or undefined', () => {
   assert.equal(getSpell(first.id).word, first.word);
   assert.equal(getSpell('nope'), undefined);
 });
+
+test('every scene has at least 8 spells', () => {
+  for (const scene of getScenes()) {
+    assert.ok(getSpellsForScene(scene.id).length >= 8, `${scene.id} has too few spells`);
+  }
+});
+
+test('every spell element has a glyph', async () => {
+  const { ELEMENT_GLYPH } = await import('../src/ui/sceneView.js');
+  for (const s of SPELLS) {
+    assert.ok(ELEMENT_GLYPH[s.element], `no glyph for ${s.element}`);
+  }
+});

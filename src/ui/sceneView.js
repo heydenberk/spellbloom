@@ -2,9 +2,15 @@
 
 // Each scene element is drawn as a positioned emoji-on-vector badge.
 // (Flat-vector look comes from CSS shapes + the gradient backdrop in styles.css.)
-const ELEMENT_GLYPH = {
+export const ELEMENT_GLYPH = {
   fern: '🌿', frog: '🐸', log: '🪵', nest: '🪺', bug: '🐞',
   web: '🕸️', moss: '🍀', twig: '🌱', pond: '💧', vine: '🍃',
+  // pond
+  fish: '🐟', shell: '🐚', duck: '🦆', ship: '⛵', reed: '🌾', swan: '🦢', crab: '🦀', moth: '🦋',
+  // sky
+  moon: '🌙', star: '⭐', kite: '🪁', rain: '🌧️', cloud: '☁️', comet: '☄️', snow: '❄️', leaf: '🍂',
+  // castle
+  dragon: '🐉', crown: '👑', torch: '🔥', gate: '🚪', key: '🗝️', flag: '🚩', cloak: '🧥', spell: '✨',
 };
 
 export function renderScene(root, { scene, bloomPercent, stars, bloomedElements = [] }) {
