@@ -1,0 +1,14 @@
+:root {
+  --bg-top: #5e60d8; --bg-bottom: #9b6be0;
+  --ink: #2a1b4d; --cream: #fff7e6; --gold: #ffd76a; --leaf: #3fa66a;
+  --radius: 16px; font-size: 18px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; -webkit-user-select: none; user-select: none;
+  touch-action: manipulation; font-family: system-ui, -apple-system, sans-serif; }
+#app { min-height: 100%; display: flex; flex-direction: column;
+  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom)); color: #fff; }
+#hud { display: flex; align-items: center; gap: 12px; padding: 12px 18px; font-weight: 700; }
+#hud #scene-name { margin-inline: auto; }
+#settings-btn { background: none; border: none; font-size: 22px; cursor: pointer; }
+h1, h2 { text-align: center; }
